@@ -15,12 +15,12 @@ static const char* const ONETEENS[] = {
   "ten",
   "eleven",
   "twelve",
-  "thir\nteen",
+  "thirteen",
   "four\nteen",
-  "fif\nteen",
-  "six\nteen",
+  "fifteen",
+  "sixteen",
   "seven\nteen",
-  "eigh\nteen",
+  "eight\nteen",
   "nine\nteen"
 };
 
