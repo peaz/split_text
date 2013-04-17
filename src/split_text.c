@@ -1,10 +1,11 @@
 /*
-   ** SplitText Watch.
-   Inspired by TextWatch
+   ** SplitTextCondensed Watch.
+   Inspired by SplitText Watch from https://github.com/peaz/split_text
    With Date, 24H display and Week #
    Hour and Min has inversed background
-   Pluses on new hours
  */
+
+
 
 #include "pebble_os.h"
 #include "pebble_app.h"
@@ -13,7 +14,7 @@
 
 #define MY_UUID { 0xE9, 0x9F, 0x3D, 0x76, 0xC4, 0x9A, 0x4E, 0x59, 0xA6, 0x38, 0xDB, 0xEB, 0xE1, 0x8E, 0x88, 0xD6 }
 PBL_APP_INFO(MY_UUID,
-             "SplitText", "atpeaz.com",
+             "SplitTextCondensed", "cowger.us",
              1, 0, /* App version */
              RESOURCE_ID_IMAGE_MENU_ICON,
              APP_INFO_WATCH_FACE);
@@ -30,6 +31,7 @@ static char str_min[20];
 static char str_date[30];
 static char str_day24week[30];
 static bool init_flag = false;
+static bool buzzhourly = false;
 
 static void update_watch(PblTm* t) {
   
@@ -37,11 +39,13 @@ static void update_watch(PblTm* t) {
   strcpy(cur_hour, str_hour);
   english_time(t->tm_hour, t->tm_min, str_hour, str_min);
   string_format_time(str_date, sizeof(str_date), "%e %B %Y", t);
-  string_format_time(str_day24week, sizeof(str_day24week), "%A | %H%M | Week %W", t);
+  string_format_time(str_day24week, sizeof(str_day24week), "%A | %H%M | Wk %W", t);
   
-  if(strcmp(cur_hour,str_hour) != 0 && init_flag == true)
+  
+  if(strcmp(cur_hour,str_hour) != 0 && init_flag == true && buzzhourly == true)
     vibes_short_pulse();
 
+  
   text_layer_set_text(&hourLayer, str_hour);
   text_layer_set_text(&minLayer, str_min);
   text_layer_set_text(&dateLayer, str_date);
